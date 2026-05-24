@@ -1,0 +1,254 @@
+openapi: 3.0.3
+info:
+  title: Offer Management API
+  description: REST API for managing IT service offers.
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/hoantiep12organizati/JavaWeb1/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: http://localhost:8080
+paths:
+  /offers:
+    get:
+      summary: List all offers
+      operationId: listOffers
+      responses:
+        "200":
+          description: List of offers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OfferDTO"
+    post:
+      summary: Create a new offer
+      operationId: createOffer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOfferRequest"
+        required: true
+      responses:
+        "201":
+          description: Offer created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OfferDTO"
+  /offers/{id}:
+    get:
+      summary: Get offer by ID
+      operationId: getOffer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Offer found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OfferDTO"
+        "404":
+          description: Offer not found
+    patch:
+      summary: Update offer
+      operationId: updateOffer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateOfferRequest"
+      responses:
+        "200":
+          description: Offer updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OfferDTO"
+  /offers/{id}/accept-offer:
+    post:
+      summary: Customer accepts the offer
+      operationId: acceptOffer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AcceptOfferRequest"
+        required: true
+      responses:
+        "200":
+          description: Offer accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OfferDTO"
+  /offers/{id}/start-work:
+    post:
+      summary: Supplier starts work
+      operationId: startWork
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Work started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OfferDTO"
+  /offers/{id}/deliver:
+    post:
+      summary: Supplier delivers the work
+      operationId: deliverWork
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Work delivered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OfferDTO"
+  /offers/{id}/accept-delivery:
+    post:
+      summary: Customer accepts the delivery
+      operationId: acceptDelivery
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AcceptDeliveryRequest"
+        required: true
+      responses:
+        "200":
+          description: Delivery accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OfferDTO"
+  /offers/{id}/invoice:
+    post:
+      summary: Supplier invoices the offer
+      operationId: invoiceOffer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Offer invoiced
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OfferDTO"
+components:
+  schemas:
+    OfferStatus:
+      type: string
+      enum:
+      - CREATED
+      - CUSTOMER_ACCEPTED
+      - IN_PROGRESS
+      - DELIVERED
+      - DELIVERY_ACCEPTED
+      - INVOICED
+    OfferDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        customerId:
+          type: string
+        supplierId:
+          type: string
+        status:
+          $ref: "#/components/schemas/OfferStatus"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CreateOfferRequest:
+      required:
+      - customerId
+      - description
+      - price
+      - supplierId
+      - title
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        customerId:
+          type: string
+        supplierId:
+          type: string
+    UpdateOfferRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+        supplierId:
+          type: string
+    AcceptOfferRequest:
+      required:
+      - acceptedByCustomerId
+      type: object
+      properties:
+        acceptedByCustomerId:
+          type: string
+    AcceptDeliveryRequest:
+      required:
+      - acceptedByCustomerId
+      type: object
+      properties:
+        acceptedByCustomerId:
+          type: string
