@@ -11,6 +11,6 @@ public class InvoiceEntity {
     public double amount;
     public LocalDate issuedAt;
     public LocalDate dueDate;
-    public String status;
+    public InvoiceStatus status;
     public Instant createdAt;
 }
