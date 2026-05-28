@@ -10,5 +10,7 @@ public interface SupplierService {
 
     SupplierEntity getSupplier(String id);
 
+    SupplierEntity addWorker(String id);
+
     List<SupplierEntity> listSuppliers();
 }
