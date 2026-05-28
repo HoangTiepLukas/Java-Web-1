@@ -1,14 +1,14 @@
 package com.javaweb1.spring.service;
 
 import com.javaweb1.spring.dto.CreateWorkerRequest;
-import com.javaweb1.spring.entity.WorkerEntity;
+import com.javaweb1.spring.dto.WorkerDTO;
 
 import java.util.List;
 
 public interface WorkerService {
-    WorkerEntity createWorker(CreateWorkerRequest request);
+    WorkerDTO createWorker(CreateWorkerRequest request);
 
-    WorkerEntity getWorker(String id);
+    WorkerDTO getWorker(String id);
 
-    List<WorkerEntity> listWorker();
+    List<WorkerDTO> listWorker();
 }

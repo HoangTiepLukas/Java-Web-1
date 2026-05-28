@@ -1,14 +1,14 @@
 package com.javaweb1.spring.service;
 
 import com.javaweb1.spring.dto.CreateInvoiceRequest;
-import com.javaweb1.spring.entity.InvoiceEntity;
+import com.javaweb1.spring.dto.InvoiceDTO;
 
 import java.util.List;
 
 public interface InvoiceService {
-    InvoiceEntity createInvoice(CreateInvoiceRequest request);
+    InvoiceDTO createInvoice(CreateInvoiceRequest request);
 
-    InvoiceEntity getInvoice(String id);
+    InvoiceDTO getInvoice(String id);
 
-    List<InvoiceEntity> listInvoice();
+    List<InvoiceDTO> listInvoice();
 }

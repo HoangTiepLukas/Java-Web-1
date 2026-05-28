@@ -1,7 +1,7 @@
 package com.javaweb1.spring.controller;
 
 import com.javaweb1.spring.dto.CreateWorkerRequest;
-import com.javaweb1.spring.entity.WorkerEntity;
+import com.javaweb1.spring.dto.WorkerDTO;
 import com.javaweb1.spring.service.WorkerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,17 +21,17 @@ public class WorkerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public WorkerEntity createWorker(@RequestBody CreateWorkerRequest request) {
+    public WorkerDTO createWorker(@RequestBody CreateWorkerRequest request) {
         return workerService.createWorker(request);
     }
 
     @GetMapping("/{id}")
-    public WorkerEntity getWorker(@PathVariable String id) {
+    public WorkerDTO getWorker(@PathVariable String id) {
         return workerService.getWorker(id);
     }
 
     @GetMapping
-    public List<WorkerEntity> listWorkers() {
+    public List<WorkerDTO> listWorkers() {
         return workerService.listWorker();
     }
 }

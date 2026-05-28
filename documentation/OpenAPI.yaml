@@ -4,10 +4,219 @@ info:
   description: REST API for managing IT service offers.
   version: 1.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/hoantiep12organizati/JavaWeb1/1.0.0
-  description: SwaggerHub API Auto Mocking
-- url: http://localhost:8080
+  - url: https://virtserver.swaggerhub.com/hoantiep12organizati/JavaWeb1/1.0.0
+    description: SwaggerHub API Auto Mocking
+  - url: http://localhost:8080
 paths:
+  /customers:
+    get:
+      summary: List all customers
+      operationId: listCustomers
+      responses:
+        "200":
+          description: List of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CustomerDTO"
+    post:
+      summary: Create a new customer
+      operationId: createCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCustomerRequest"
+      responses:
+        "201":
+          description: Customer created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerDTO"
+  /customers/{id}:
+    get:
+      summary: Get customer by ID
+      operationId: getCustomer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Customer found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerDTO"
+        "404":
+          description: Customer not found
+  /suppliers:
+    get:
+      summary: List all suppliers
+      operationId: listSuppliers
+      responses:
+        "200":
+          description: List of suppliers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SupplierDTO"
+    post:
+      summary: Create a new supplier
+      operationId: createSupplier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSupplierRequest"
+      responses:
+        "201":
+          description: Supplier created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierDTO"
+  /suppliers/{id}:
+    get:
+      summary: Get supplier by ID
+      operationId: getSupplier
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Supplier found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierDTO"
+        "404":
+          description: Supplier not found
+  /suppliers/add-worker/{id}:
+    post:
+      summary: Add worker to supplier
+      operationId: addWorkerToSupplier
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Supplier updated with worker
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SupplierDTO"
+  /workers:
+    get:
+      summary: List all workers
+      operationId: listWorkers
+      responses:
+        "200":
+          description: List of workers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WorkerDTO"
+    post:
+      summary: Create a new worker
+      operationId: createWorker
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWorkerRequest"
+      responses:
+        "201":
+          description: Worker created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkerDTO"
+  /workers/{id}:
+    get:
+      summary: Get worker by ID
+      operationId: getWorker
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Worker found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkerDTO"
+        "404":
+          description: Worker not found
+  /invoices:
+    get:
+      summary: List all invoices
+      operationId: listInvoices
+      responses:
+        "200":
+          description: List of invoices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InvoiceDTO"
+    post:
+      summary: Create a new invoice
+      operationId: createInvoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInvoiceRequest"
+      responses:
+        "201":
+          description: Invoice created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceDTO"
+  /invoices/{id}:
+    get:
+      summary: Get invoice by ID
+      operationId: getInvoice
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Invoice found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceDTO"
+        "404":
+          description: Invoice not found
   /offers:
     get:
       summary: List all offers
@@ -42,11 +251,11 @@ paths:
       summary: Get offer by ID
       operationId: getOffer
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Offer found
@@ -60,12 +269,13 @@ paths:
       summary: Update offer
       operationId: updateOffer
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -82,17 +292,17 @@ paths:
       summary: Customer accepts the offer
       operationId: acceptOffer
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/AcceptOfferRequest"
-        required: true
       responses:
         "200":
           description: Offer accepted
@@ -105,11 +315,11 @@ paths:
       summary: Supplier starts work
       operationId: startWork
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Work started
@@ -122,11 +332,11 @@ paths:
       summary: Supplier delivers the work
       operationId: deliverWork
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Work delivered
@@ -139,17 +349,17 @@ paths:
       summary: Customer accepts the delivery
       operationId: acceptDelivery
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/AcceptDeliveryRequest"
-        required: true
       responses:
         "200":
           description: Delivery accepted
@@ -162,11 +372,11 @@ paths:
       summary: Supplier invoices the offer
       operationId: invoiceOffer
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Offer invoiced
@@ -176,15 +386,108 @@ paths:
                 $ref: "#/components/schemas/OfferDTO"
 components:
   schemas:
+    ErrorItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: FIELD_INVALID
+        scope:
+          type: string
+          example: task.name
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/ErrorItem"
+    CustomerDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    SupplierDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        description:
+          type: string
+        services:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    WorkerDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        supplierId:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        role:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    InvoiceDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        offerId:
+          type: string
+        customerId:
+          type: string
+        supplierId:
+          type: string
+        invoiceNumber:
+          type: string
+        amount:
+          type: number
+        issuedAt:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        status:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
     OfferStatus:
       type: string
       enum:
-      - CREATED
-      - CUSTOMER_ACCEPTED
-      - IN_PROGRESS
-      - DELIVERED
-      - DELIVERY_ACCEPTED
-      - INVOICED
+        - CREATED
+        - CUSTOMER_ACCEPTED
+        - IN_PROGRESS
+        - DELIVERED
+        - DELIVERY_ACCEPTED
+        - INVOICED
     OfferDTO:
       type: object
       properties:
@@ -205,16 +508,13 @@ components:
         createdAt:
           type: string
           format: date-time
-        updatedAt:
-          type: string
-          format: date-time
     CreateOfferRequest:
       required:
-      - customerId
-      - description
-      - price
-      - supplierId
-      - title
+        - customerId
+        - description
+        - price
+        - supplierId
+        - title
       type: object
       properties:
         title:
@@ -240,15 +540,95 @@ components:
           type: string
     AcceptOfferRequest:
       required:
-      - acceptedByCustomerId
+        - customerId
       type: object
       properties:
-        acceptedByCustomerId:
+        customerId:
           type: string
     AcceptDeliveryRequest:
       required:
-      - acceptedByCustomerId
+        - customerId
       type: object
       properties:
-        acceptedByCustomerId:
+        customerId:
+          type: string
+    CreateCustomerRequest:
+      required:
+        - email
+        - name
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    CreateSupplierRequest:
+      required:
+        - email
+        - name
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        description:
+          type: string
+        services:
+          type: string
+    CreateWorkerRequest:
+      required:
+        - email
+        - name
+        - password
+      type: object
+      properties:
+        supplierId:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+        role:
+          type: string
+    CreateInvoiceRequest:
+      required:
+        - amount
+        - customerId
+        - dueDate
+        - invoiceNumber
+        - issuedAt
+        - offerId
+        - status
+        - supplierId
+      type: object
+      properties:
+        offerId:
+          type: string
+        customerId:
+          type: string
+        supplierId:
+          type: string
+        invoiceNumber:
+          type: string
+        amount:
+          type: number
+        issuedAt:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        status:
           type: string
