@@ -14,6 +14,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     public CustomerController(CustomerService customerService) {
+
         this.customerService = customerService;
     }
 
@@ -25,6 +26,7 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     public CustomerEntity getCustomer(@PathVariable String id) {
+
         return customerService.getCustomer(id);
     }
 

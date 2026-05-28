@@ -1,6 +1,7 @@
 package com.javaweb1.spring.dto;
 
 import java.time.Instant;
+import com.javaweb1.spring.entity.OfferStatus;
 
 public class OfferDTO {
     public String id;
@@ -9,6 +10,6 @@ public class OfferDTO {
     public double price;
     public String supplierId;
     public String customerId;
-    public String status;
+    public OfferStatus status;
     public Instant createdAt;
 }

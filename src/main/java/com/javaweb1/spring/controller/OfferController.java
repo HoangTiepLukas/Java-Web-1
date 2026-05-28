@@ -35,22 +35,27 @@ public class OfferController {
         return offerService.getOffer(id);
     }
 
-    @PatchMapping("/{id}/accept-offer")
+    @PostMapping("/{id}/accept-offer")
     public OfferDTO acceptOffer(@PathVariable String id, @RequestBody AcceptOfferRequest request) {
         return offerService.acceptOffer(id,request);
     }
 
-    @PatchMapping("/{id}/start-work")
+    @PostMapping("/{id}/start-work")
     public OfferDTO startWork(@PathVariable String id) {
         return offerService.startWork(id);
     }
 
-    @PatchMapping("/{id}/delivery")
+    @PostMapping("/{id}/deliver")
     public OfferDTO deliverWork(@PathVariable String id) {
         return offerService.deliverWork(id);
     }
 
-    @PatchMapping("/{id}/accept-delivery")
+    @PostMapping("/{id}/invoice")
+    public OfferDTO invoiceOffer(@PathVariable String id) {
+        return offerService.invoiceOffer(id);
+    }
+
+    @PostMapping("/{id}/accept-delivery")
     public OfferDTO acceptDelivery(@PathVariable String id, @RequestBody AcceptDeliveryRequest request) {
         return offerService.acceptDelivery(id, request);
     }
