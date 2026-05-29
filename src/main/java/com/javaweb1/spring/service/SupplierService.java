@@ -1,14 +1,17 @@
 package com.javaweb1.spring.service;
 
-import com.javaweb1.spring.entity.SupplierEntity;
+import com.javaweb1.spring.dto.CreateSupplierRequest;
+import com.javaweb1.spring.dto.SupplierDTO;
 
 import java.util.List;
 
 public interface SupplierService {
 
-    SupplierEntity createSupplier(SupplierEntity supplier);
+    SupplierDTO createSupplier(CreateSupplierRequest supplier);
 
-    SupplierEntity getSupplier(String id);
+    SupplierDTO getSupplier(String id);
 
-    List<SupplierEntity> listSuppliers();
+    SupplierDTO addWorker(String id);
+
+    List<SupplierDTO> listSuppliers();
 }

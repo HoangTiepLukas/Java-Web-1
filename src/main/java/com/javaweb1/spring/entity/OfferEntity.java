@@ -7,9 +7,8 @@ public class OfferEntity {
     public String title;
     public String description;
     public double price;
-    public String customerId;
     public String supplierId;
-    public String status;
+    public String customerId;
+    public OfferStatus status;
     public Instant createdAt;
-    public Instant updatedAt;
 }

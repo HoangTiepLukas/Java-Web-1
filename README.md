@@ -1,6 +1,6 @@
 ## Spring Boot Web 1
 
-![Data Model](documentation/DataModel.svg)
+![Data Model](documentation/data_model_diagram.drawio.png)
 
 **This project is a backend Spring Boot application for managing IT service offers.**
 **The system uses a REST API that allows customers and suppliers to manage offers**

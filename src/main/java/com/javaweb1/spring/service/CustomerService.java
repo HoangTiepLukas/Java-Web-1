@@ -1,14 +1,16 @@
 package com.javaweb1.spring.service;
 
+import com.javaweb1.spring.dto.CreateCustomerRequest;
+import com.javaweb1.spring.dto.CustomerDTO;
 import com.javaweb1.spring.entity.CustomerEntity;
 
 import java.util.List;
 
 public interface CustomerService {
 
-    CustomerEntity createCustomer(CustomerEntity customer);
+    CustomerDTO createCustomer(CreateCustomerRequest customer);
 
-    CustomerEntity getCustomer(String id);
+    CustomerDTO getCustomer(String id);
 
-    List<CustomerEntity> listCustomers();
+    List<CustomerDTO> listCustomers();
 }
